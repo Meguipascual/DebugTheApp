@@ -1,50 +1,42 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CongratScript : MonoBehaviour
 {
-    public TextMesh Text;
-    public ParticleSystem SparksParticles;
-    
-    private List<string> TextToDisplay;
-    
-    private float RotatingSpeed;
-    private float TimeToNextText;
-
-    private int CurrentText;
+    public TextMesh text;
+    public ParticleSystem sparksParticles;
+    private List<string> textToDisplay;
+    private float timeToNextText;
+    private int currentText;
     
     // Start is called before the first frame update
     void Start()
     {
-        TimeToNextText = 0.0f;
-        CurrentText = 0
-        
-        RotatingSpeed = 1.0;
-
-        TextToDisplay.Add("Congratulation");
-        TextToDisplay.Add("All Errors Fixed");
-
-        Text.text = TextToDisplay[0];
-        
-        SparksParticles.Play();
+        timeToNextText = 0.0f;
+        currentText = 0;
+        textToDisplay = new List<string>();
+        textToDisplay.Add("Congratulation");
+        textToDisplay.Add("All Errors Fixed");
+        text.text = textToDisplay[0];
+        sparksParticles.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        TimeToNextText += Time.deltaTime;
+        timeToNextText += Time.deltaTime;
 
-        if (TimeToNextText > 1.5f)
+        if (timeToNextText > 1.5f)
         {
-            TimeToNextText = 0.0f;
-            
-            CurrentText++;
-            if (CurrentText >= TextToDisplay.Count)
+            timeToNextText = 0.0f;
+            currentText++;
+
+            if (currentText >= textToDisplay.Count)
             {
-                CurrentText = 0;
-
-
-            Text.text = TextToDisplay[CurrentText];
+                currentText = 0;
+            }
+            text.text = textToDisplay[currentText];
         }
     }
 }
